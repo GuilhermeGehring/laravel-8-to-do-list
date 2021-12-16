@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class TodoResource extends JsonResource
 {
@@ -14,6 +15,11 @@ class TodoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'title' => strtolower($this->name),
+            'body' => $this->description,
+            'completed' => $this->completed ? 'S' : 'N',
+            'date' => Carbon::create($this->created_at)->format('Y-m-d'),
+        ];
     }
 }
