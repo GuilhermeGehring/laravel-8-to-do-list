@@ -24,7 +24,9 @@ class StoreUpdateTodo extends FormRequest
     public function rules()
     {
         return [
-            'name'
+            'name' => ['required', 'min:3', 'max:255'],
+            'description' => ['required', 'min:3', 'max:9999'],
+            'completed' => ['required', 'boolean']
         ];
     }
 }
